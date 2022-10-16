@@ -19,10 +19,9 @@ I just want an application that can help me keep track of how much money I have 
 
 ## User Stories
 
-- As a user, I want to be able to create subcategories (ex. food, tuition, etc.) for my income and expenses
-- As a user, I want to be able to add or delete transactions under the larger income/expense category and 
-the corresponding subcategories
-- As a user, I want to be able to select either income/expenses, and see a list of all corresponding transactions 
-- As a user, I want to be able to select a subcategory, and see a list of all corresponding transactions 
-- As a user, I want to be able to check my current savings (income - expenses)
+- As a user, I want to be add or delete transactions
+- As a user, I want to be able to categorize my transactions as income or expenses
+- As a user, I want to be able to keep a current balance
+- As a user, I want to be able to see a list of all of my transactions
+- As a user, I want to be able to subcategorize my transactions as income or expenses(ex. tuition, foods, etc) 
 
