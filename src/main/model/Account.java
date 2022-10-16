@@ -24,7 +24,7 @@ public class Account {
         this.transactions.add(transaction);
         if (transaction.getTransactionType() == TransactionType.INCOME) {
             this.balance = this.balance + transaction.getTransactionAmount();
-        } else if (transaction.getTransactionType() == TransactionType.EXPENSE) {
+        } else {
             this.balance = this.balance - transaction.getTransactionAmount();
         }
     }

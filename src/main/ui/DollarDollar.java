@@ -98,6 +98,7 @@ public class DollarDollar {
         int id = scanner.nextInt();
         Transaction deletedTrans = transactionList.getTransactions().get(id - 1);
         this.transactionList.deleteTransaction(deletedTrans);
+        System.out.println("Updated!");
         displayTransactionList(transactionList);
         System.out.println("");
     }
