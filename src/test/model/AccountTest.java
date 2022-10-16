@@ -26,20 +26,20 @@ public class AccountTest {
     }
 
     @Test
-    void addTransactionPositiveBalanceTest() {
+    void addTransactionIncomeTest() {
         testAccount.addTransaction(transA);
         assertEquals(TransactionType.INCOME, transA.getTransactionType());
-        assertFalse(transA.getTransactionType() == TransactionType.EXPENSE);
         assertEquals(1, testAccount.getTransactions().size());
         assertEquals(200.00, testAccount.getBalance());
         assertTrue(testAccount.getTransactions().contains(transA));
+        assertNotSame(TransactionType.EXPENSE, transA.getTransactionType());
     }
 
     @Test
-    void addTransactionNegativeBalanceTest() {
+    void addTransactionExpenseTest() {
         testAccount.addTransaction(transB);
+        assertNotSame(TransactionType.INCOME, transB.getTransactionType());
         assertEquals(TransactionType.EXPENSE, transB.getTransactionType());
-        assertFalse(transB.getTransactionType() == TransactionType.INCOME);
         assertEquals(1, testAccount.getTransactions().size());
         assertEquals(-50.00, testAccount.getBalance());
         assertTrue(testAccount.getTransactions().contains(transB));
@@ -50,9 +50,9 @@ public class AccountTest {
         testAccount.addTransaction(transA);
         testAccount.addTransaction(transB);
         assertEquals(TransactionType.INCOME, transA.getTransactionType());
-        assertFalse(transA.getTransactionType() == TransactionType.EXPENSE);
+        assertNotSame(TransactionType.EXPENSE, transA.getTransactionType());
         assertEquals(TransactionType.EXPENSE, transB.getTransactionType());
-        assertFalse(transB.getTransactionType() == TransactionType.INCOME);
+        assertNotSame(TransactionType.INCOME, transB.getTransactionType());
         assertEquals(2, testAccount.getTransactions().size());
         assertEquals(150.00, testAccount.getBalance());
         assertEquals(transA, testAccount.getTransactions().get(0));
@@ -60,15 +60,27 @@ public class AccountTest {
     }
 
     @Test
-    void deleteTransactionsTest() {
+    void deleteTransactionsExpenseTest() {
         testAccount.addTransaction(transA);
         testAccount.addTransaction(transB);
         testAccount.deleteTransaction(transB);
+        assertNotSame(TransactionType.INCOME, transB.getTransactionType());
         assertEquals(TransactionType.EXPENSE, transB.getTransactionType());
-        assertFalse(transB.getTransactionType() == TransactionType.INCOME);
         assertEquals(1, testAccount.getTransactions().size());
         assertEquals(200, testAccount.getBalance());
         assertEquals(transA, testAccount.getTransactions().get(0));
+    }
+
+    @Test
+    void deleteTransactionsIncomeTest() {
+        testAccount.addTransaction(transA);
+        testAccount.addTransaction(transB);
+        testAccount.deleteTransaction(transA);
+        assertEquals(TransactionType.INCOME, transA.getTransactionType());
+        assertEquals(1, testAccount.getTransactions().size());
+        assertEquals(-50.00, testAccount.getBalance());
+        assertEquals(transB, testAccount.getTransactions().get(0));
+        assertNotSame(TransactionType.EXPENSE, transA.getTransactionType());
     }
 
     @Test
@@ -79,9 +91,9 @@ public class AccountTest {
         testAccount.deleteTransaction(transA);
         testAccount.deleteTransaction(transC);
         assertEquals(TransactionType.INCOME, transA.getTransactionType());
-        assertFalse(transA.getTransactionType() == TransactionType.EXPENSE);
+        assertNotSame(TransactionType.EXPENSE, transA.getTransactionType());
         assertEquals(TransactionType.EXPENSE, transC.getTransactionType());
-        assertFalse(transC.getTransactionType() == TransactionType.INCOME);
+        assertNotSame(TransactionType.INCOME, transC.getTransactionType());
         assertEquals(1, testAccount.getTransactions().size());
         assertEquals(-50.00, testAccount.getBalance());
         assertEquals(transB, testAccount.getTransactions().get(0));
