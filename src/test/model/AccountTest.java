@@ -29,6 +29,7 @@ public class AccountTest {
     @Test
     void addTransactionPositiveBalanceTest() {
         testAccount.addTransaction(transA);
+        assertEquals(TransactionType.INCOME, transA.getTransactionType());
         assertEquals(1, testAccount.getTransactions().size());
         assertEquals(200.00, testAccount.getBalance());
         assertTrue(testAccount.getTransactions().contains(transA));
@@ -37,6 +38,7 @@ public class AccountTest {
     @Test
     void addTransactionNegativeBalanceTest() {
         testAccount.addTransaction(transB);
+        assertEquals(TransactionType.EXPENSE, transB.getTransactionType());
         assertEquals(1, testAccount.getTransactions().size());
         assertEquals(-50.00, testAccount.getBalance());
         assertTrue(testAccount.getTransactions().contains(transB));
@@ -46,6 +48,8 @@ public class AccountTest {
     void addMultipleTransactionsTest() {
         testAccount.addTransaction(transA);
         testAccount.addTransaction(transB);
+        assertEquals(TransactionType.INCOME, transA.getTransactionType());
+        assertEquals(TransactionType.EXPENSE, transB.getTransactionType());
         assertEquals(2, testAccount.getTransactions().size());
         assertEquals(150.00, testAccount.getBalance());
         assertEquals(transA, testAccount.getTransactions().get(0));
@@ -57,6 +61,7 @@ public class AccountTest {
         testAccount.addTransaction(transA);
         testAccount.addTransaction(transB);
         testAccount.deleteTransaction(transB);
+        assertEquals(TransactionType.EXPENSE, transB.getTransactionType());
         assertEquals(1, testAccount.getTransactions().size());
         assertEquals(200, testAccount.getBalance());
         assertEquals(transA, testAccount.getTransactions().get(0));
@@ -69,6 +74,8 @@ public class AccountTest {
         testAccount.addTransaction(transC);
         testAccount.deleteTransaction(transA);
         testAccount.deleteTransaction(transC);
+        assertEquals(TransactionType.INCOME, transA.getTransactionType());
+        assertEquals(TransactionType.EXPENSE, transC.getTransactionType());
         assertEquals(1, testAccount.getTransactions().size());
         assertEquals(-50.00, testAccount.getBalance());
         assertEquals(transB, testAccount.getTransactions().get(0));
