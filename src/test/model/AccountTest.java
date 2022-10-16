@@ -3,8 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountTest {
     private Account testAccount;
@@ -30,6 +29,7 @@ public class AccountTest {
     void addTransactionPositiveBalanceTest() {
         testAccount.addTransaction(transA);
         assertEquals(TransactionType.INCOME, transA.getTransactionType());
+        assertFalse(transA.getTransactionType() == TransactionType.EXPENSE);
         assertEquals(1, testAccount.getTransactions().size());
         assertEquals(200.00, testAccount.getBalance());
         assertTrue(testAccount.getTransactions().contains(transA));
@@ -39,6 +39,7 @@ public class AccountTest {
     void addTransactionNegativeBalanceTest() {
         testAccount.addTransaction(transB);
         assertEquals(TransactionType.EXPENSE, transB.getTransactionType());
+        assertFalse(transB.getTransactionType() == TransactionType.INCOME);
         assertEquals(1, testAccount.getTransactions().size());
         assertEquals(-50.00, testAccount.getBalance());
         assertTrue(testAccount.getTransactions().contains(transB));
@@ -49,7 +50,9 @@ public class AccountTest {
         testAccount.addTransaction(transA);
         testAccount.addTransaction(transB);
         assertEquals(TransactionType.INCOME, transA.getTransactionType());
+        assertFalse(transA.getTransactionType() == TransactionType.EXPENSE);
         assertEquals(TransactionType.EXPENSE, transB.getTransactionType());
+        assertFalse(transB.getTransactionType() == TransactionType.INCOME);
         assertEquals(2, testAccount.getTransactions().size());
         assertEquals(150.00, testAccount.getBalance());
         assertEquals(transA, testAccount.getTransactions().get(0));
@@ -62,6 +65,7 @@ public class AccountTest {
         testAccount.addTransaction(transB);
         testAccount.deleteTransaction(transB);
         assertEquals(TransactionType.EXPENSE, transB.getTransactionType());
+        assertFalse(transB.getTransactionType() == TransactionType.INCOME);
         assertEquals(1, testAccount.getTransactions().size());
         assertEquals(200, testAccount.getBalance());
         assertEquals(transA, testAccount.getTransactions().get(0));
@@ -75,7 +79,9 @@ public class AccountTest {
         testAccount.deleteTransaction(transA);
         testAccount.deleteTransaction(transC);
         assertEquals(TransactionType.INCOME, transA.getTransactionType());
+        assertFalse(transA.getTransactionType() == TransactionType.EXPENSE);
         assertEquals(TransactionType.EXPENSE, transC.getTransactionType());
+        assertFalse(transC.getTransactionType() == TransactionType.INCOME);
         assertEquals(1, testAccount.getTransactions().size());
         assertEquals(-50.00, testAccount.getBalance());
         assertEquals(transB, testAccount.getTransactions().get(0));
