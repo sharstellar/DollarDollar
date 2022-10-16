@@ -81,8 +81,5 @@ public class AccountTest {
         assertEquals(transB, testAccount.getTransactions().get(0));
     }
 
-
-
-
 }
 
