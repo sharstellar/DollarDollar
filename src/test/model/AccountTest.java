@@ -13,7 +13,7 @@ public class AccountTest {
 
     @BeforeEach
     void setUp() {
-        testAccount = new Account();
+        testAccount = new Account("Stellar's account");
         transA = new Transaction(TransactionType.INCOME, 200.00);
         transB = new Transaction(TransactionType.EXPENSE, 50.00);
         transC = new Transaction(TransactionType.EXPENSE, 100);
@@ -23,6 +23,7 @@ public class AccountTest {
     void constructorTest(){
         assertEquals(0, testAccount.getTransactions().size());
         assertEquals(0.0, testAccount.getBalance());
+        assertEquals("Stellar's account", testAccount.getName());
     }
 
     @Test

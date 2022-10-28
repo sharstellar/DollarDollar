@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 //Represent a single transaction
 public class Transaction {
     private TransactionType transType;       // whether the transaction was an income or an expense
@@ -26,5 +29,12 @@ public class Transaction {
     @Override
     public String toString() {
         return "Transaction Type:" + transType + ", Amount:" + amount;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("transaction type", transType);
+        json.put("amount", amount);
+        return json;
     }
 }

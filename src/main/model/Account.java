@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,12 +10,14 @@ import java.util.List;
 public class Account {
     private double balance;                     // the current balance of the account
     private List<Transaction> transactions;     // the current list of transactions of the account
+    private String name;                        // the name associated with account
 
 
     //EFFECTS: constructs an account with empty list of transactions and initial balance of 0
-    public Account() {
+    public Account(String name) {
         this.transactions = new ArrayList<>();
         this.balance = 0.00;
+        this.name = name;
     }
 
     //MODIFIES: this
@@ -52,4 +57,27 @@ public class Account {
         return this.transactions;
     }
 
+    //EFFECTS: returns the name associated with account
+    public String getName() {
+        return this.name;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("balance", balance);
+        json.put("transactions", transToJson());
+        json.put("name", name);
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray transToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Transaction t : transactions) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
+    }
 }

@@ -3,41 +3,65 @@ package ui;
 import model.Transaction;
 import model.Account;
 import model.TransactionType;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // DollarDollar application
 public class DollarDollar {
+    private static final String JSON_STORE = "./data/workroom.json";
     private Scanner scanner;
-    private Account transactionList;
+    private Account account;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     //EFFECTS: runs the DollarDollar application
-    public DollarDollar() {
+    public DollarDollar() throws FileNotFoundException {
         scanner = new Scanner(System.in);
-        this.transactionList = new Account();
+        this.account = new Account("Stellar's account");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runDollarDollar();
     }
 
     //MODIFIES: this
     //EFFECTS: processes user's activity input (what they are hoping to do next)
     private void runDollarDollar() {
+        boolean proceed = true;
         int choice;
-        mainMenu();
-        choice = scanner.nextInt();
-        processChoice(choice);
+
+        while (proceed) {
+            mainMenu();
+            choice = scanner.nextInt();
+
+            if (choice == 7) {
+                proceed = false;
+            } else {
+                processChoice(choice);
+            }
+        }
+
+        System.out.println("Bye!");
     }
 
     //MODIFIES: this
     //EFFECTS: processes user's choice to activity by application
     private void processChoice(int choice) {
         if (choice == 1) {
-            displayTransactionList(transactionList);
+            displayTransactionList(account);
         } else if (choice == 2) {
-            newTransaction(transactionList);
+            newTransaction(account);
         } else if (choice == 3) {
-            removeTransaction(transactionList);
+            removeTransaction(account);
         } else if (choice == 4) {
-            viewBalance(transactionList);
+            viewBalance(account);
+        } else if (choice == 5) {
+            saveAccount();
+        } else if (choice == 6) {
+            loadAccount();
         } else {
             System.out.println("Please select a valid option number");
             runDollarDollar();
@@ -56,6 +80,9 @@ public class DollarDollar {
         System.out.println("2. Add a Transaction");
         System.out.println("3. Delete a Transaction");
         System.out.println("4. View Balance");
+        System.out.println("5. Save Transactions");
+        System.out.println("6. Load Previous Transactions");
+        System.out.println("7: Quit");
         System.out.println("");
         System.out.println("Enter option number: ");
     }
@@ -63,10 +90,10 @@ public class DollarDollar {
     //EFFECTS: displays a list of transactions of user
     public void displayTransactionList(Account transactionList) {
         System.out.println("Here is a list of all your transactions:");
-        if (this.transactionList.getTransactions().size() == 0) {
+        if (this.account.getTransactions().size() == 0) {
             System.out.println("You havn't entered any transaction yet!");
         }
-        this.transactionList.getTransactions().forEach(System.out::println);
+        this.account.getTransactions().forEach(System.out::println);
         System.out.println("");
     }
 
@@ -80,10 +107,10 @@ public class DollarDollar {
         Double amount = scanner.nextDouble();
         if (type.equals("income")) {
             Transaction newTrans = new Transaction(TransactionType.INCOME, amount);
-            this.transactionList.addTransaction(newTrans);
+            this.account.addTransaction(newTrans);
         } else if (type.equals("expense")) {
             Transaction newTrans = new Transaction(TransactionType.EXPENSE, amount);
-            this.transactionList.addTransaction(newTrans);
+            this.account.addTransaction(newTrans);
         }
         System.out.println("");
     }
@@ -97,7 +124,7 @@ public class DollarDollar {
         System.out.println("(count starting from one!)");
         int id = scanner.nextInt();
         Transaction deletedTrans = transactionList.getTransactions().get(id - 1);
-        this.transactionList.deleteTransaction(deletedTrans);
+        this.account.deleteTransaction(deletedTrans);
         System.out.println("Updated!");
         displayTransactionList(transactionList);
         System.out.println("");
@@ -106,8 +133,31 @@ public class DollarDollar {
     //EFFECTS: returns the user's current balance
     public void viewBalance(Account transactionList) {
 
-        System.out.println("Here is your current balance:" + "$" + this.transactionList.getBalance());
+        System.out.println("Here is your current balance:" + "$" + this.account.getBalance());
         System.out.println("");
+    }
+
+    //EFFECT: saves the account to file
+    private void saveAccount() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(account);
+            jsonWriter.close();
+            System.out.println("Saved " + account.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads account from file
+    private void loadAccount() {
+        try {
+            account = jsonReader.read();
+            System.out.println("Loaded " + account.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }
 

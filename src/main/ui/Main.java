@@ -1,9 +1,13 @@
 package ui;
 
-import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
-        new DollarDollar();
+        try {
+            new DollarDollar();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to run application: file not found");
+        }
     }
 }

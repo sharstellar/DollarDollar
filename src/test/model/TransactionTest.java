@@ -23,6 +23,5 @@ public class TransactionTest {
     void toStringTest() {
         String expected = "Transaction Type:INCOME, Amount:100.0";
         assertEquals(expected, testTrans.toString());
-
     }
 }
