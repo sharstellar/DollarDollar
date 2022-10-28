@@ -5,6 +5,7 @@ public class Transaction {
     private TransactionType transType;       // whether the transaction was an income or an expense
     private double amount;                   // the transaction amount
 
+    //REQUIRES: amount > 0
     //EFFECTS: creates a transaction with corresponding transaction type (income or expense) and given amount
     public Transaction(TransactionType transType, double amount) {
         this.transType = transType;

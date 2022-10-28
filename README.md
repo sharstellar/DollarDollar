@@ -23,5 +23,5 @@ I just want an application that can help me keep track of how much money I have 
 - As a user, I want to be able to categorize my transactions as income or expenses
 - As a user, I want to be able to keep a current balance
 - As a user, I want to be able to see a list of all of my transactions
-- As a user, I want to be able to subcategorize my transactions as income or expenses(ex. tuition, foods, etc) 
-
+- As a user, I want to be able to have the choice of loading my transaction list from file when I start application
+- As a user, I want to be able to have the option of saving my transaction list when I quit the application 
