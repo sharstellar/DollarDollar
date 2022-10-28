@@ -1,0 +1,14 @@
+{
+  "balance": 25,
+  "name": "Stellar's account",
+  "transactions": [
+    {
+      "amount": 100,
+      "transaction type": "INCOME"
+    },
+    {
+      "amount": 75,
+      "transaction type": "EXPENSE"
+    }
+  ]
+}

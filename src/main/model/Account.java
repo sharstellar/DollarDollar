@@ -2,12 +2,13 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a user with a list of transactions and balance (in dollars)
-public class Account {
+public class Account implements Writable {
     private double balance;                     // the current balance of the account
     private List<Transaction> transactions;     // the current list of transactions of the account
     private String name;                        // the name associated with account
@@ -62,6 +63,7 @@ public class Account {
         return this.name;
     }
 
+    @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("balance", balance);

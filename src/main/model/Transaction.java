@@ -2,9 +2,10 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.Writable;
 
 //Represent a single transaction
-public class Transaction {
+public class Transaction implements Writable {
     private TransactionType transType;       // whether the transaction was an income or an expense
     private double amount;                   // the transaction amount
 
@@ -31,6 +32,7 @@ public class Transaction {
         return "Transaction Type:" + transType + ", Amount:" + amount;
     }
 
+    @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("transaction type", transType);

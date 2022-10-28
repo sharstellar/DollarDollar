@@ -44,7 +44,7 @@ public class DollarDollar {
             }
         }
 
-        System.out.println("Bye!");
+        System.out.println("bye!");
     }
 
     //MODIFIES: this
