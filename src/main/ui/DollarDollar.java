@@ -8,6 +8,7 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 // DollarDollar application
@@ -38,7 +39,13 @@ public class DollarDollar {
             choice = scanner.nextInt();
 
             if (choice == 7) {
-                proceed = false;
+                System.out.println("Would you like to save transactions from the current session?");
+                String answer = scanner.next();
+                if (answer == "yes") {
+                    processChoice(5);
+                } else {
+                    proceed = false;
+                }
             } else {
                 processChoice(choice);
             }
@@ -76,7 +83,7 @@ public class DollarDollar {
 
         System.out.println("Main Menu");
         System.out.println("What can DollarDollar help you with?");
-        System.out.println("1. Display My Transaction List");
+        System.out.println("1. Display My Transactions for Current Session");
         System.out.println("2. Add a Transaction");
         System.out.println("3. Delete a Transaction");
         System.out.println("4. View Balance");
@@ -93,8 +100,11 @@ public class DollarDollar {
         if (this.account.getTransactions().size() == 0) {
             System.out.println("You havn't entered any transaction yet!");
         }
-        this.account.getTransactions().forEach(System.out::println);
-        System.out.println("");
+        int counter = 1;
+        for (Transaction t : this.account.getTransactions()) {
+            System.out.println(counter + ": " + t);
+            counter++;
+        }
     }
 
     //MODIFIES: this
@@ -120,8 +130,7 @@ public class DollarDollar {
     public void removeTransaction(Account transactionList) {
 
         displayTransactionList(transactionList);
-        System.out.println("Please enter the row of the transaction you would like to remove: ");
-        System.out.println("(count starting from one!)");
+        System.out.println("Please enter the ID of the transaction you would like to remove: ");
         int id = scanner.nextInt();
         Transaction deletedTrans = transactionList.getTransactions().get(id - 1);
         this.account.deleteTransaction(deletedTrans);
