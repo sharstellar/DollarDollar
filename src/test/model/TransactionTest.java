@@ -21,7 +21,7 @@ public class TransactionTest {
 
     @Test
     void toStringTest() {
-        String expected = "Transaction Type:INCOME, Amount:100.0";
+        String expected = "Transaction Type: INCOME, Amount: 100.0";
         assertEquals(expected, testTrans.toString());
     }
 }
