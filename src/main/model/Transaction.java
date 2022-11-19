@@ -30,7 +30,7 @@ public class Transaction implements Writable {
     // "Transaction Type:(transaction type), Amount:(transaction amount)"
     @Override
     public String toString() {
-        return "Transaction Type:" + transType + ", Amount:" + amount;
+        return "Transaction Type: " + transType + ", Amount: " + amount;
     }
 
     @Override
