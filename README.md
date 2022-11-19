@@ -26,6 +26,18 @@ I just want an application that can help me keep track of how much money I have 
 - As a user, I want to be able to have the choice of loading my transaction list from file when I start application
 - As a user, I want to be able to have the option of saving my transaction list when I quit the application 
 
+## Instructions for Grader
+- You can generate the first required event relating to adding transactions to account through the "Add a Transaction" 
+button and entering information following prompt.
+- You can generate the second required event relating to deleting transactions from account through the 
+"Remove a Transaction" button and entering information following prompt.
+- You can locate my visual component within a pop-up that can be shown through the "Quit" menu at the top of menu bar.
+- You can save the state of my application by pressing the "Save Transactions" button.
+- You can reload the state of my application by pressing the "Load Previous Transactions" button.
+
 ## Citation 
 The Json methods and tests are modeled from 
 [JsonSerializationDemo - WorkRoomAPP.java](https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git)
+Another individual references are stated directly above relating methods as comments
+
+

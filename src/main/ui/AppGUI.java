@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -150,7 +152,9 @@ public class AppGUI extends JFrame implements ActionListener {
             if (account.getTransactions().size() != 0) {
                 removeTransaction();
             } else {
-                displayMsg("You haven't entered any transactions yet!", "System Error");
+                JOptionPane.showMessageDialog(displayPanel,
+                        "You haven't entered any transactions yet! ",
+                        "System Error", JOptionPane.PLAIN_MESSAGE);
             }
         } else if (e.getSource() == saveButton) {
             saveTransactions();
@@ -211,7 +215,8 @@ public class AppGUI extends JFrame implements ActionListener {
         if (input == JOptionPane.OK_OPTION) {
             Transaction deletedTrans = account.getTransactions().get(intID - 1);
             account.deleteTransaction(deletedTrans);
-            displayMsg("Deleted Transaction", "Update");
+            JOptionPane.showMessageDialog(displayPanel, "Deleted Transaction",
+                    "Update", JOptionPane.PLAIN_MESSAGE);
         }
 
         displayTransactions();
@@ -225,9 +230,11 @@ public class AppGUI extends JFrame implements ActionListener {
             jsonWriter.write(account);
             jsonWriter.close();
 
-            displayMsg("Saved Transactions to " + JSON_STORE, "Saved Transactions");
+            JOptionPane.showMessageDialog(displayPanel, "Saved transactions to " + JSON_STORE,
+                    "Saved Transactions", JOptionPane.PLAIN_MESSAGE);
         } catch (FileNotFoundException e) {
-            displayMsg("Failed to Saved Transactions to " + JSON_STORE, "System Error");
+            JOptionPane.showMessageDialog(displayPanel, "Failed to save transactions to " + JSON_STORE,
+                    "System Error", JOptionPane.PLAIN_MESSAGE);
         }
 
         displayTransactions();
@@ -239,7 +246,8 @@ public class AppGUI extends JFrame implements ActionListener {
         try {
             account = jsonReader.read();
 
-            displayMsg("Loaded previous transactions from " + JSON_STORE, "Loaded Transactions");
+            JOptionPane.showMessageDialog(displayPanel, "Load previous transactions from  " + JSON_STORE,
+                    "Loaded Transactions", JOptionPane.PLAIN_MESSAGE);
 
             displayPanel.removeAll();
             displayTransactions();
@@ -248,7 +256,8 @@ public class AppGUI extends JFrame implements ActionListener {
             repaint();
 
         } catch (IOException e) {
-            displayMsg("Fail to load transactions from " + JSON_STORE, "System Error");
+            JOptionPane.showMessageDialog(displayPanel, "Failed to load transactions from " + JSON_STORE,
+                    "System Error", JOptionPane.PLAIN_MESSAGE);
         }
 
         displayTransactions();
@@ -307,10 +316,6 @@ public class AppGUI extends JFrame implements ActionListener {
         displayPanel.revalidate();
     }
 
-    //EFFECTS: helper method for creating and displaying given message
-    public void displayMsg(String message, String title) {
-        JOptionPane.showMessageDialog(displayPanel, message, title, JOptionPane.PLAIN_MESSAGE);
-    }
 
     public static void main(String[] args) {
         new AppGUI();
