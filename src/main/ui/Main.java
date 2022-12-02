@@ -3,6 +3,7 @@ package ui;
 import javax.swing.*;
 import java.io.FileNotFoundException;
 
+// runs DollarDollar application without GUI
 public class Main extends JFrame {
 
     public static void main(String[] args) {

@@ -33,6 +33,9 @@ public class Account implements Writable {
         } else {
             this.balance = this.balance - transaction.getTransactionAmount();
         }
+
+        EventLog.getInstance().logEvent(new Event(("Added Transaction: " + transaction.getTransactionType()
+                + " $" + transaction.getTransactionAmount())));
     }
 
     //MODIFIES: this
@@ -46,6 +49,9 @@ public class Account implements Writable {
         } else {
             this.balance = this.balance + transaction.getTransactionAmount();
         }
+
+        EventLog.getInstance().logEvent(new Event(("Deleted Transaction: " + transaction.getTransactionType()
+                + " $" + transaction.getTransactionAmount())));
     }
 
     //EFFECTS: returns the current balance of account
@@ -80,6 +86,7 @@ public class Account implements Writable {
             jsonArray.put(t.toJson());
         }
 
+        EventLog.getInstance().logEvent(new Event("Saved current transaction list"));
         return jsonArray;
     }
 }

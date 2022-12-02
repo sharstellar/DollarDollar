@@ -1,8 +1,11 @@
 package ui;
 
 import model.Account;
+import model.EventLog;
 import model.Transaction;
 import model.TransactionType;
+import model.Event;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -15,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// runs graphical user interface of DollarDollar
 public class AppGUI extends JFrame implements ActionListener {
 
     private Account account;
@@ -289,6 +293,7 @@ public class AppGUI extends JFrame implements ActionListener {
                 JOptionPane.YES_OPTION, JOptionPane.PLAIN_MESSAGE, makeIcon(imgIcon));
 
         if (input == JOptionPane.YES_OPTION) {
+            printLog();
             System.exit(0);
         }
     }
@@ -314,6 +319,13 @@ public class AppGUI extends JFrame implements ActionListener {
         }
         displayPanel.repaint();
         displayPanel.revalidate();
+    }
+
+    //EFFECTS: prints out event log onto console
+    public void printLog() {
+        for (Event next : EventLog.getInstance()) {
+            System.out.println((next.getDate() + " : " + next.getDescription()));
+        }
     }
 
 

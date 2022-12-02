@@ -1,8 +1,6 @@
 package ui;
 
-import model.Transaction;
-import model.Account;
-import model.TransactionType;
+import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -168,6 +166,13 @@ public class DollarDollar {
             System.out.println("Loaded " + account.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: prints out event log onto console
+    private void printLog() {
+        for (Event next : EventLog.getInstance()) {
+            System.out.println((next.getDate() + " : " + next.getDescription()));
         }
     }
 }

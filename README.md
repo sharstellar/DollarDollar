@@ -35,6 +35,17 @@ button and entering information following prompt.
 - You can save the state of my application by pressing the "Save Transactions" button.
 - You can reload the state of my application by pressing the "Load Previous Transactions" button.
 
+## Phase 4 : Task 2
+Here is a representative sample of events that occur when DollarDollar runs:
+
+Fri Dec 02 00:01:00 PST 2022 : Added Transaction: INCOME $100.0
+
+Fri Dec 02 00:01:07 PST 2022 : Added Transaction: INCOME $500.0
+
+Fri Dec 02 00:01:13 PST 2022 : Added Transaction: EXPENSE $200.0
+
+Fri Dec 02 00:01:16 PST 2022 : Saved current transaction list
+
 ## Citation 
 The Json methods and tests are modeled from 
 [JsonSerializationDemo - WorkRoomAPP.java](https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git)
