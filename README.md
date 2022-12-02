@@ -53,7 +53,7 @@ transaction. To follow the Single Responsibility Principle for strictly, I would
 and one for a list of transactions) and then put them together in the Account class. 
 - There is code duplication throughout the program, notably under the Account class 
 (addTransaction() & removeTransaction()) and in AppGui (for pop-up window display). To reduce this, I would create a new 
-method that I could call within the old methods in the future. 
+method that I could call within the old methods in the future.
 
  
 
