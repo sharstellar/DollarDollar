@@ -46,6 +46,18 @@ Fri Dec 02 00:01:13 PST 2022 : Added Transaction: EXPENSE $200.0
 
 Fri Dec 02 00:01:16 PST 2022 : Saved current transaction list
 
+## Phase 4 : Task 3
+Reflection: 
+- The current design of the Account class includes functions to calculate a balance and functions for a list of 
+transaction. To follow the Single Responsibility Principle for strictly, I would create two more classes (one for balance
+and one for a list of transactions) and then put them together in the Account class. 
+- There is code duplication throughout the program, notably under the Account class 
+(addTransaction() & removeTransaction()) and in AppGui (for pop-up window display). To reduce this, I would create a new 
+method that I could call within the old methods in the future. 
+
+ 
+
+
 ## Citation 
 The Json methods and tests are modeled from 
 [JsonSerializationDemo - WorkRoomAPP.java](https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git)
