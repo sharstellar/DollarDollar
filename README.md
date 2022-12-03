@@ -55,7 +55,6 @@ and one for a list of transactions) and then put them together in the Account cl
 (addTransaction() & removeTransaction()) and in AppGui (for pop-up window display). To reduce this, I would create a new 
 method that I could call within the old methods in the future.
 
- 
 
 
 ## Citation 
