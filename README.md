@@ -10,7 +10,6 @@ because with **DollarDollar, bookkeeping has never been easier!**
 Users can: 
 - record income and expenses
 - categorize transactions 
-- check current savings
 
 I designed this application in hopes to improve my personal finances.
 Paying has never been easier with cell phones, but at the same time, monitoring my spending has never been harder.
@@ -21,7 +20,6 @@ I just want an application that can help me keep track of how much money I have 
 
 - As a user, I want to be add or delete transactions
 - As a user, I want to be able to categorize my transactions as income or expenses
-- As a user, I want to be able to keep a current balance
 - As a user, I want to be able to see a list of all of my transactions
 - As a user, I want to be able to have the choice of loading my transaction list from file when I start application
 - As a user, I want to be able to have the option of saving my transaction list when I quit the application 
